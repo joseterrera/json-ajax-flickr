@@ -1,0 +1,86 @@
+There are a lot of people talking around me, and I feel a bit tired. I think yoga will be the highpoint of my day today. It is an interesting studio, and I like finishing my day there. 
+
+Ive been working with leaflet the last few days, but overall it seemed pretty self-explainatory, so I will not really upload someone else's project about it, but I will keep it in mind, in terms of using json data and maps. Then I found that maybe google is also a viable alternative, and there are lots of tutorials out there. I should use it for the app that I intend to do with those people I randomly met, but it is hard to focus on one thing sometimes. 
+
+I thought this ajax project was a bit more interesting, as it mixes common jquery tasks which I have yet to internalize. I watched this tutorial a few more time, and I will probably go through the parts I found interesting.
+
+15 min till I finish my shift, and then I can legally step away from my desk and finish this text without everyone talking around me.
+
+Speaking of trivial, what the heck am I writing in here? Back to ajax!
+
+Everything is wrapped up in a document ready function.
+
+First step is to select the form, and then submit.
+.submit will trigger the function with the argument (evt).
+
+2 more variables $submitButton and $searchField.
+Then evt.preventDefault();
+
+The prop method gets the property value for only the first element in the matched set. If we wanted to get the value for each element individually, we would do each or map. 
+So, it retrieves property values.
+In this case, ("disabled", true) disables the form so you can't type new text into the text field.  Also disable the $submitButton, and add the value .val() of "searching".
+
+These will be re-enabled after we finish loading the pictures. 
+
+We also create a var animal with val in it.
+Val either returns a value or sets a value. 
+("searching")
+
+.html adds html content
+but in this case, I must confess, it is not totally clear.
+$('#photos').html('');
+??
+
+Then the getJSOn 3 arguments, flickerAPI, then the elements of the object of the site, and then a function that pretty much adds text to the html document, as it iterates over each element of the json doc.
+
+
+Now I understood, the $('#photos').html('');
+At first it is empty, and then you add there the json results. ahhhhhhhhhhhhhhhh!!!!!
+
+simple, bonito y util!
+
+
+There was another project in this tutorial that I found interesting. I won't upload it, though. I will rewrite the juery in here, cause it helps to write it and write this.
+
+It had to do with an internal list of employees who are either in or out of office.
+
+
+
+
+$(document).ready(function() {
+$.getJSON('../data/employess.json', function(data) {
+	//first you need to create the list
+	var status HTML = '<ul class="bulleted">';
+	//then you need to go through each person in the list, and see if they are in or out. .each takes two parameters, the data and a function.
+
+	$.each(data, function(index, employee) {
+		if(employee.inoffice === true) {
+			statusHTML += '<li class="in">';
+		} else {
+			statusHTML += '<li class="out">';
+		}
+		statusHTML += employee.name + '</li>';
+	});//end each
+	statusHTML += '</ul>';
+	$('#employeeList').html(statusHTML);
+}); //end getJSOn
+	
+}); //end ready
+
+
+this is for the rooms if they are full or empty. What I don't get is why they use the same variable as on top. 
+
+$.getJSON('../data/rooms.json', function(data) {
+	var statusHTML = '<ul class="rooms">';
+	$.each(data,function(index, room){
+		if(room.available === true) {
+			statusHTML += '<li class="empty">';
+		} else {
+			statusHTML += '<li class="full">';
+		}
+		statusHTML += room.room += '</li>';
+	});
+	statusHTML += '</ul>';
+	$('#roomList').html(statusHTML);
+});//end JSON
+
